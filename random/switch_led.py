@@ -2,7 +2,6 @@ import RPi.GPIO as IO
 import time
 import sys
 
-# programming t04:07 PMhe GPIO by BOARD pin numbers, GPIO21$
 IO.setmode(IO.BOARD)
 # initialize digital pin40 as an output.
 IO.setup(40, IO.OUT)
