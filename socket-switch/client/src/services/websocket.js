@@ -16,4 +16,4 @@ const closeSocket = () => {
   socket.close();
 };
 
-export { statusEventListener, emitToggle };
+export { statusEventListener, emitToggle, closeSocket };

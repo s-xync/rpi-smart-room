@@ -15,4 +15,7 @@ const io = socket(server);
 
 io.on("connection", client => {
   console.log(`Client connected with id ${client.id}`);
+  client.emit("status", {
+    buttonStatus: "HI"
+  });
 });

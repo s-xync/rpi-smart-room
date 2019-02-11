@@ -8,7 +8,7 @@ import {
 
 class App extends Component {
   state = {
-    button: false
+    buttonStatus: false
   };
   componentDidMount() {
     this.ejected = false;
@@ -22,12 +22,13 @@ class App extends Component {
   bindStatusEventListener = () => {
     statusEventListener((err, data) => {
       if (!this.ejected) {
-        this.setState({ button: data.buttonStatus });
+        this.setState({ buttonStatus: data.buttonStatus });
       }
     });
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="App">
         <h1>Hi</h1>
