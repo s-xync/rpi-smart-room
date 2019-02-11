@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Switch from "react-switch";
 import "./App.css";
 import {
   statusEventListener,
@@ -14,6 +15,7 @@ class App extends Component {
     this.ejected = false;
     this.bindStatusEventListener();
   }
+
   componentWillUnmount() {
     this.ejected = true;
     closeSocket();
@@ -27,11 +29,21 @@ class App extends Component {
     });
   };
 
+  handleChange = buttonStatus => {
+    this.setState({ buttonStatus });
+    emitToggle();
+  };
+
   render() {
-    console.log(this.state);
     return (
-      <div className="App">
-        <h1>Hi</h1>
+      <div id="app">
+        <p>
+          Switch the light <strong>ON</strong> or <strong>OFF</strong>
+        </p>
+        <Switch
+          onChange={this.handleChange}
+          checked={this.state.buttonStatus}
+        />
       </div>
     );
   }

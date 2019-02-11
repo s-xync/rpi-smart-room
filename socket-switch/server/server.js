@@ -13,9 +13,15 @@ const server = app.listen(PORT, () => {
 
 const io = socket(server);
 
+var buttonStatus = false;
+
 io.on("connection", client => {
   console.log(`Client connected with id ${client.id}`);
   client.emit("status", {
-    buttonStatus: "HI"
+    buttonStatus
+  });
+  client.on("toggle", () => {
+    buttonStatus = !buttonStatus;
+    io.sockets.emit("status", { buttonStatus });
   });
 });
