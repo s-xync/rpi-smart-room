@@ -1,6 +1,7 @@
 const express = require("express");
 const socket = require("socket.io");
 const cors = require("cors");
+const Gpio = require("onoff").Gpio;
 
 const app = express();
 
@@ -15,6 +16,8 @@ const io = socket(server);
 
 var buttonStatus = false;
 
+const led = new Gpio(21, "out");
+
 io.on("connection", client => {
   console.log(`Client connected with id ${client.id}`);
   client.emit("status", {
@@ -22,6 +25,12 @@ io.on("connection", client => {
   });
   client.on("toggle", () => {
     buttonStatus = !buttonStatus;
-    io.sockets.emit("status", { buttonStatus });
+    led.write(buttonStatus ? 1 : 0, err => {
+      io.sockets.emit("status", { buttonStatus });
+    });
   });
+});
+
+process.on("SIGINT", () => {
+  led.unexport();
 });
