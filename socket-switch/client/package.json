@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "deploy": "surge teardown https://socket-switch.surge.sh && surge build https://socket-switch.surge.sh"
   },
   "eslintConfig": {
     "extends": "react-app"

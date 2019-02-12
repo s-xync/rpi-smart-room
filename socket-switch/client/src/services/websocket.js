@@ -1,6 +1,6 @@
 import openSocket from "socket.io-client";
 
-const socket = openSocket("http://192.168.43.152:4000");
+const socket = openSocket(process.env.REACT_APP_SERVER_URL);
 
 const statusEventListener = callback => {
   socket.on("status", data => {
