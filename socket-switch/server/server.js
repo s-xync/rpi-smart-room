@@ -16,7 +16,11 @@ const io = socket(server);
 
 var buttonStatus = false;
 
-const led = new Gpio(21, "out");
+const led = new Gpio(21, "out"); //40th pin
+
+const button = new Gpio(20, "in", "both"); //38th pin
+
+button.watch((err, value) => console.log(value));
 
 io.on("connection", client => {
   console.log(`Client connected with id ${client.id}`);
