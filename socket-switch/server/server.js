@@ -32,7 +32,7 @@ io.on("connection", client => {
     });
   });
   button.watch((err, value) => {
-    if (value === 0) {
+    if (value == 1) {
       buttonStatus = !buttonStatus;
       led.write(buttonStatus ? 1 : 0, err => {
         io.sockets.emit("status", { buttonStatus });
