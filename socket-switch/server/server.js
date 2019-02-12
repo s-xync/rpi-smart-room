@@ -20,8 +20,6 @@ const led = new Gpio(21, "out"); //40th pin
 
 const button = new Gpio(20, "in", "both"); //38th pin
 
-button.watch((err, value) => console.log(value));
-
 io.on("connection", client => {
   console.log(`Client connected with id ${client.id}`);
   client.emit("status", {
@@ -33,8 +31,17 @@ io.on("connection", client => {
       io.sockets.emit("status", { buttonStatus });
     });
   });
+  button.watch((err, value) => {
+    if (value === 0) {
+      buttonStatus = !buttonStatus;
+      led.write(buttonStatus ? 1 : 0, err => {
+        io.sockets.emit("status", { buttonStatus });
+      });
+    }
+  });
 });
 
 process.on("SIGINT", () => {
   led.unexport();
+  button.unexport();
 });
