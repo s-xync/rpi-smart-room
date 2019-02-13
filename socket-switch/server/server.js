@@ -2,6 +2,7 @@ const express = require("express");
 const socket = require("socket.io");
 const cors = require("cors");
 const Gpio = require("onoff").Gpio;
+const dhtSensorLib = require("node-dht-sensor");
 
 const app = express();
 
@@ -18,7 +19,9 @@ var buttonStatus = false;
 
 const led = new Gpio(21, "out"); //40th pin
 
-const button = new Gpio(20, "in", "both"); //38th pin
+const button = new Gpio(13, "in", "both"); //33rd pin
+
+const dht11Pin = 4; //7th pin
 
 io.on("connection", client => {
   console.log(`Client connected with id ${client.id}`);
@@ -36,6 +39,26 @@ io.on("connection", client => {
       buttonStatus = !buttonStatus;
       led.write(buttonStatus ? 1 : 0, err => {
         io.sockets.emit("status", { buttonStatus });
+      });
+    }
+  });
+});
+
+app.get("/tempandhumid", (req, res) => {
+  // 11 --> DHT11 type
+  dhtSensorLib.read(11, dht11Pin, (err, temperature, humidity) => {
+    if (!err) {
+      return res.json({
+        success: true,
+        message: {
+          temperature,
+          humidity
+        }
+      });
+    } else {
+      return res.json({
+        success: false,
+        message: "Internal server error"
       });
     }
   });
