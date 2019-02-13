@@ -2,6 +2,23 @@
   margin-left: 10%;
 }
 
-#app p {
+#app .heading {
   text-decoration: underline;
+}
+
+#app .refresh-button {
+  background-color: #1264dd; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+#app .refresh-button:focus {
+  outline: none;
 }
