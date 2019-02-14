@@ -19,6 +19,7 @@ class App extends Component {
     this.ejected = false;
     this.bindStatusEventListener();
     this.getTempAndHumid();
+    console.log(process.env.REACT_APP_SERVER_URL);
   }
 
   componentWillUnmount() {

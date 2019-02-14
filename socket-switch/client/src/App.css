@@ -17,6 +17,7 @@
   display: inline-block;
   font-size: 14px;
   border-radius: 20px;
+  cursor: pointer;
 }
 
 #app .refresh-button:focus {
