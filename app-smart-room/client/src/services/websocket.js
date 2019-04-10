@@ -9,7 +9,7 @@ const statusEventListener = callback => {
 };
 
 const emitToggle = callback => {
-  socket.emit("toggle", null);
+  socket.emit("toggleButtonOnOff", null);
 };
 
 const closeSocket = () => {

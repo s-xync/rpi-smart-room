@@ -28,6 +28,9 @@ io.on("connection", client => {
   client.emit("status", {
     buttonStatus
   });
+  client.on("toggleButtonOnOff", data => {
+    console.log(data.buttonStatus);
+  });
   client.on("toggle", () => {
     buttonStatus = !buttonStatus;
     led.write(buttonStatus ? 1 : 0, err => {
