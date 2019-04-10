@@ -4,8 +4,8 @@ import axios from "axios";
 import "./App.css";
 import {
   statusEventListener,
-  emitLightSwitchToggle,
-  emitLightSwitchAutomaticToggle,
+  emitSetLightSwitchStatus,
+  emitSetLightSwitchAutomatic,
   closeSocket
 } from "./services/websocket";
 
@@ -58,12 +58,12 @@ class App extends Component {
 
   handleChangeLightSwitch = lightSwitchStatus => {
     this.setState({ lightSwitchStatus });
-    emitLightSwitchToggle();
+    emitSetLightSwitchStatus(lightSwitchStatus);
   };
 
   handleChangeLightSwitchAutomatic = lightSwitchAutomatic => {
     this.setState({ lightSwitchAutomatic });
-    emitLightSwitchAutomaticToggle();
+    emitSetLightSwitchAutomatic(lightSwitchAutomatic);
   };
 
   render() {

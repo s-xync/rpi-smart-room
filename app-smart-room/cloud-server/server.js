@@ -69,14 +69,16 @@ io.on("connection", client => {
 
   client.emit("lightSwitchStatus", lightSwitch);
 
-  client.on("lightSwitchToggle", () => {
+  client.on("setLightSwitchStatus", ({ lightSwitchStatus }) => {
     // changing changeableLightSwitch will trigger events using the onChange utility
-    changeableLightSwitch.status = !lightSwitch.status;
+    // changeableLightSwitch.status = !lightSwitch.status;
+    changeableLightSwitch.status = lightSwitchStatus;
   });
 
-  client.on("lightSwitchAutomaticToggle", () => {
+  client.on("setLightSwitchAutomatic", ({ lightSwitchAutomatic }) => {
     // changing changeableLightSwitch will trigger events using the onChange utility
-    changeableLightSwitch.automatic = !lightSwitch.automatic;
+    // changeableLightSwitch.automatic = !lightSwitch.automatic;
+    changeableLightSwitch.automatic = lightSwitchAutomatic;
   });
 
   socketCloudToRpiClient.on("lightSwitchStatus", lightSwitch => {

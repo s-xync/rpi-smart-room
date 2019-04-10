@@ -12,12 +12,12 @@ const statusEventListener = callback => {
   });
 };
 
-const emitLightSwitchToggle = () => {
-  socket.emit("lightSwitchToggle", null);
+const emitSetLightSwitchStatus = lightSwitchStatus => {
+  socket.emit("setLightSwitchStatus", { lightSwitchStatus });
 };
 
-const emitLightSwitchAutomaticToggle = () => {
-  socket.emit("lightSwitchAutomaticToggle", null);
+const emitSetLightSwitchAutomatic = lightSwitchAutomatic => {
+  socket.emit("setLightSwitchAutomatic", { lightSwitchAutomatic });
 };
 
 const closeSocket = () => {
@@ -26,7 +26,7 @@ const closeSocket = () => {
 
 export {
   statusEventListener,
-  emitLightSwitchToggle,
-  emitLightSwitchAutomaticToggle,
+  emitSetLightSwitchStatus,
+  emitSetLightSwitchAutomatic,
   closeSocket
 };

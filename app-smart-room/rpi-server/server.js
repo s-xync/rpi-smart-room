@@ -29,6 +29,7 @@ const pirSensor = new Gpio(5, "in"); //29th pin
 
 io.on("connection", client => {
   console.log(`Cloud client connected with id ${client.id}`);
+
   client.on("lightSwitchStatus", lightSwitch => {
     lightSwitchStatus = lightSwitch.status;
     lightSwitchAutomatic = lightSwitch.automatic;
@@ -36,8 +37,10 @@ io.on("connection", client => {
       io.sockets.emit("lightSwitchStatus", lightSwitch);
     });
   });
+
   lightSwitchButton.watch((err, value) => {
     if (value == 1) {
+      lightSwitchAutomatic = false;
       lightSwitchStatus = !lightSwitchStatus;
       led.write(lightSwitchStatus ? 1 : 0, err => {
         io.sockets.emit("lightSwitchStatus", {
@@ -59,7 +62,7 @@ io.on("connection", client => {
         });
       });
     }
-  }, 5000);
+  }, 1000);
 });
 
 app.get("/tempandhumid", (req, res) => {
