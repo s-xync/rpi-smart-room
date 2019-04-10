@@ -15,33 +15,36 @@ const server = app.listen(PORT, () => {
 
 const io = socket(server);
 
-var buttonStatus = false;
+var lightSwitchStatus = false;
 
 const led = new Gpio(21, "out"); //40th pin
 
-const button = new Gpio(13, "in", "both"); //33rd pin
+const lightSwitchButton = new Gpio(13, "in", "both"); //33rd pin
 
 const dht11Pin = 4; //7th pin
 
 io.on("connection", client => {
   console.log(`Cloud client connected with id ${client.id}`);
   // client.emit("status", {
-  //   buttonStatus
+  //   lightSwitchStatus
   // });
   client.on("lightSwitchStatus", lightSwitch => {
-    console.log(lightSwitch.status);
-  });
-  client.on("toggle", () => {
-    buttonStatus = !buttonStatus;
-    led.write(buttonStatus ? 1 : 0, err => {
-      io.sockets.emit("status", { buttonStatus });
+    lightSwitchStatus = lightSwitch.status;
+    led.write(lightSwitch.status ? 1 : 0, err => {
+      io.sockets.emit("lightSwitchStatus", lightSwitch);
     });
   });
-  button.watch((err, value) => {
+  // client.on("toggle", () => {
+  //   lightSwitchStatus = !lightSwitchStatus;
+  //   led.write(lightSwitchStatus ? 1 : 0, err => {
+  //     io.sockets.emit("status", { lightSwitchStatus });
+  //   });
+  // });
+  lightSwitchButton.watch((err, value) => {
     if (value == 1) {
-      buttonStatus = !buttonStatus;
-      led.write(buttonStatus ? 1 : 0, err => {
-        io.sockets.emit("status", { buttonStatus });
+      lightSwitchStatus = !lightSwitchStatus;
+      led.write(lightSwitchStatus ? 1 : 0, err => {
+        io.sockets.emit("lightSwitchStatus", { status: lightSwitchStatus });
       });
     }
   });
@@ -69,5 +72,5 @@ app.get("/tempandhumid", (req, res) => {
 
 process.on("SIGINT", () => {
   led.unexport();
-  button.unexport();
+  lightSwitch.unexport();
 });

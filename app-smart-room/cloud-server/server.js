@@ -1,7 +1,7 @@
 const express = require("express");
 const socket = require("socket.io");
-const cors = require("cors");
 const openSocket = require("socket.io-client");
+const cors = require("cors");
 
 require("dotenv").config({ path: __dirname + "/.env.local" });
 
@@ -70,5 +70,10 @@ io.on("connection", client => {
   client.on("lightSwitchToggle", () => {
     // changing changeableLightSwitch will trigger events using the onChange utility
     changeableLightSwitch.status = !lightSwitch.status;
+    // io.sockets.emit("lightSwitchStatus", lightSwitch);
+  });
+
+  socketCloudToRpiClient.on("lightSwitchStatus", lightSwitch => {
+    io.sockets.emit("lightSwitchStatus", lightSwitch);
   });
 });
