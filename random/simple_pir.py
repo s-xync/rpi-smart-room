@@ -1,10 +1,13 @@
-import RPi.GPIO as GPIO
+import RPi.GPIO as IO
 import time
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11, GPIO.IN)         #Read output from PIR motion sensor
-GPIO.setup(3, GPIO.OUT)         #LED output pin
+IO.setwarnings(False)
+IO.setmode(IO.BOARD)
+IO.setup(40, IO.IN)         #Read output from PIR motion sensor
+#IO.setup(3, IO.OUT)         #LED output pin
 while True:
-i=GPIO.input(11)
-if i==0:                 #When output from motion sensor is LOW
-	print "No intruders",i
+	time.sleep(1)
+	i=IO.input(40)
+	if i==0:                 #When output from motion sensor is LOW
+		print "No Intruders",i
+	else:
+		print "Intruders",i
