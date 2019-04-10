@@ -16,8 +16,17 @@ const emitLightSwitchToggle = () => {
   socket.emit("lightSwitchToggle", null);
 };
 
+const emitLightSwitchAutomaticToggle = () => {
+  socket.emit("lightSwitchAutomaticToggle", null);
+};
+
 const closeSocket = () => {
   socket.close();
 };
 
-export { statusEventListener, emitLightSwitchToggle, closeSocket };
+export {
+  statusEventListener,
+  emitLightSwitchToggle,
+  emitLightSwitchAutomaticToggle,
+  closeSocket
+};

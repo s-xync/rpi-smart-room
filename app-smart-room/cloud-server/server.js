@@ -45,7 +45,8 @@ const onChange = (object, onChange) => {
 const socketCloudToRpiClient = openSocket(process.env.RPI_SERVER_URL);
 
 let lightSwitch = {
-  status: false
+  status: false,
+  automatic: false
 };
 
 let changeableLightSwitch;
@@ -71,6 +72,11 @@ io.on("connection", client => {
   client.on("lightSwitchToggle", () => {
     // changing changeableLightSwitch will trigger events using the onChange utility
     changeableLightSwitch.status = !lightSwitch.status;
+  });
+
+  client.on("lightSwitchAutomaticToggle", () => {
+    // changing changeableLightSwitch will trigger events using the onChange utility
+    changeableLightSwitch.automatic = !lightSwitch.automatic;
   });
 
   socketCloudToRpiClient.on("lightSwitchStatus", lightSwitch => {

@@ -5,12 +5,14 @@ import "./App.css";
 import {
   statusEventListener,
   emitLightSwitchToggle,
+  emitLightSwitchAutomaticToggle,
   closeSocket
 } from "./services/websocket";
 
 class App extends Component {
   state = {
     lightSwitchStatus: false,
+    lightSwitchAutomatic: false,
     temperature: 0,
     humidity: 0
   };
@@ -46,14 +48,22 @@ class App extends Component {
   bindStatusEventListener = () => {
     statusEventListener((err, lightSwitch) => {
       if (!this.ejected) {
-        this.setState({ lightSwitchStatus: lightSwitch.status });
+        this.setState({
+          lightSwitchStatus: lightSwitch.status,
+          lightSwitchAutomatic: lightSwitch.automatic
+        });
       }
     });
   };
 
-  handleChange = lightSwitchStatus => {
+  handleChangeLightSwitch = lightSwitchStatus => {
     this.setState({ lightSwitchStatus });
     emitLightSwitchToggle();
+  };
+
+  handleChangeLightSwitchAutomatic = lightSwitchAutomatic => {
+    this.setState({ lightSwitchAutomatic });
+    emitLightSwitchAutomaticToggle();
   };
 
   render() {
@@ -63,7 +73,11 @@ class App extends Component {
           Switch the light <strong>ON</strong> or <strong>OFF</strong>
         </p>
         <Switch
-          onChange={this.handleChange}
+          onChange={this.handleChangeLightSwitchAutomatic}
+          checked={this.state.lightSwitchAutomatic}
+        />
+        <Switch
+          onChange={this.handleChangeLightSwitch}
           checked={this.state.lightSwitchStatus}
         />
         <br />

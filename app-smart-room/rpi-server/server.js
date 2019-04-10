@@ -15,7 +15,9 @@ const server = app.listen(PORT, () => {
 
 const io = socket(server);
 
-var lightSwitchStatus = false;
+let lightSwitchStatus = false;
+let lightSwitchAutomatic = false;
+let pirSensorInterval;
 
 const led = new Gpio(21, "out"); //40th pin
 
@@ -29,6 +31,7 @@ io.on("connection", client => {
   console.log(`Cloud client connected with id ${client.id}`);
   client.on("lightSwitchStatus", lightSwitch => {
     lightSwitchStatus = lightSwitch.status;
+    lightSwitchAutomatic = lightSwitch.automatic;
     led.write(lightSwitch.status ? 1 : 0, err => {
       io.sockets.emit("lightSwitchStatus", lightSwitch);
     });
@@ -37,10 +40,26 @@ io.on("connection", client => {
     if (value == 1) {
       lightSwitchStatus = !lightSwitchStatus;
       led.write(lightSwitchStatus ? 1 : 0, err => {
-        io.sockets.emit("lightSwitchStatus", { status: lightSwitchStatus });
+        io.sockets.emit("lightSwitchStatus", {
+          status: lightSwitchStatus,
+          automatic: lightSwitchAutomatic
+        });
       });
     }
   });
+
+  pirSensorInterval = setInterval(() => {
+    if (lightSwitchAutomatic) {
+      const presence = pirSensor.readSync();
+      lightSwitchStatus = presence == 0 ? false : true;
+      led.write(lightSwitchStatus ? 1 : 0, err => {
+        io.sockets.emit("lightSwitchStatus", {
+          status: lightSwitchStatus,
+          automatic: lightSwitchAutomatic
+        });
+      });
+    }
+  }, 5000);
 });
 
 app.get("/tempandhumid", (req, res) => {
@@ -62,10 +81,6 @@ app.get("/tempandhumid", (req, res) => {
     }
   });
 });
-
-const pirSensorInterval = setInterval(() => {
-  pirSensor.read();
-}, 10000);
 
 process.on("SIGINT", () => {
   clearInterval(pirSensorInterval);
