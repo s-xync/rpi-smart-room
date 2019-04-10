@@ -24,12 +24,12 @@ const button = new Gpio(13, "in", "both"); //33rd pin
 const dht11Pin = 4; //7th pin
 
 io.on("connection", client => {
-  console.log(`Client connected with id ${client.id}`);
-  client.emit("status", {
-    buttonStatus
-  });
-  client.on("toggleButtonOnOff", data => {
-    console.log(data.buttonStatus);
+  console.log(`Cloud client connected with id ${client.id}`);
+  // client.emit("status", {
+  //   buttonStatus
+  // });
+  client.on("lightSwitchStatus", lightSwitch => {
+    console.log(lightSwitch.status);
   });
   client.on("toggle", () => {
     buttonStatus = !buttonStatus;

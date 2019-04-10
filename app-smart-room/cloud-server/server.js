@@ -43,31 +43,32 @@ const onChange = (object, onChange) => {
 
 const socketCloudToRpiClient = openSocket(process.env.RPI_SERVER_URL);
 
-let button = {
+let lightSwitch = {
   status: false
 };
 
-let changeableButton;
+let changeableLightSwitch;
 
-changeableButton = onChange(button, () => {
+socketCloudToRpiClient.on("connect", () => {
+  socketCloudToRpiClient.emit("lightSwitchStatus", lightSwitch);
+});
+
+changeableLightSwitch = onChange(lightSwitch, () => {
   setTimeout(() => {
     // emits event to server on the raspberry pi
-    socketCloudToRpiClient.emit("toggleButtonOnOff", {
-      buttonStatus: button.status
-    });
+    socketCloudToRpiClient.emit("lightSwitchStatus", lightSwitch);
   }, 0);
 });
 
 const io = socket(server);
 
 io.on("connection", client => {
-  console.log(`Client connected with id ${client.id}`);
+  console.log(`Browser client connected with id ${client.id}`);
 
-  client.emit("status", {
-    buttonStatus: button.status
-  });
+  client.emit("lightSwitchStatus", lightSwitch);
 
-  client.on("toggleButtonOnOff", () => {
-    changeableButton.status = !button.status;
+  client.on("lightSwitchToggle", () => {
+    // changing changeableLightSwitch will trigger events using the onChange utility
+    changeableLightSwitch.status = !lightSwitch.status;
   });
 });

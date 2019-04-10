@@ -4,13 +4,13 @@ import axios from "axios";
 import "./App.css";
 import {
   statusEventListener,
-  emitToggle,
+  emitLightSwitchToggle,
   closeSocket
 } from "./services/websocket";
 
 class App extends Component {
   state = {
-    buttonStatus: false,
+    lightSwitchStatus: false,
     temperature: 0,
     humidity: 0
   };
@@ -42,16 +42,16 @@ class App extends Component {
   };
 
   bindStatusEventListener = () => {
-    statusEventListener((err, data) => {
+    statusEventListener((err, lightSwitch) => {
       if (!this.ejected) {
-        this.setState({ buttonStatus: data.buttonStatus });
+        this.setState({ lightSwitchStatus: lightSwitch.status });
       }
     });
   };
 
-  handleChange = buttonStatus => {
-    this.setState({ buttonStatus });
-    emitToggle();
+  handleChange = lightSwitchStatus => {
+    this.setState({ lightSwitchStatus });
+    emitLightSwitchToggle();
   };
 
   render() {
@@ -62,7 +62,7 @@ class App extends Component {
         </p>
         <Switch
           onChange={this.handleChange}
-          checked={this.state.buttonStatus}
+          checked={this.state.lightSwitchStatus}
         />
         <br />
         <br />
