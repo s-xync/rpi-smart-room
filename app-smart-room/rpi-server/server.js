@@ -23,6 +23,8 @@ const lightSwitchButton = new Gpio(13, "in", "both"); //33rd pin
 
 const dht11Pin = 4; //7th pin
 
+const pirSensor = new Gpio(5, "in"); //29th pin
+
 io.on("connection", client => {
   console.log(`Cloud client connected with id ${client.id}`);
   client.on("lightSwitchStatus", lightSwitch => {
@@ -61,7 +63,13 @@ app.get("/tempandhumid", (req, res) => {
   });
 });
 
+const pirSensorInterval = setInterval(() => {
+  pirSensor.read();
+}, 10000);
+
 process.on("SIGINT", () => {
+  clearInterval(pirSensorInterval);
+  led.writeSync(0);
   led.unexport();
   lightSwitchButton.unexport();
 });
