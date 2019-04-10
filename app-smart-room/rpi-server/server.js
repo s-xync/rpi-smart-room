@@ -25,21 +25,12 @@ const dht11Pin = 4; //7th pin
 
 io.on("connection", client => {
   console.log(`Cloud client connected with id ${client.id}`);
-  // client.emit("status", {
-  //   lightSwitchStatus
-  // });
   client.on("lightSwitchStatus", lightSwitch => {
     lightSwitchStatus = lightSwitch.status;
     led.write(lightSwitch.status ? 1 : 0, err => {
       io.sockets.emit("lightSwitchStatus", lightSwitch);
     });
   });
-  // client.on("toggle", () => {
-  //   lightSwitchStatus = !lightSwitchStatus;
-  //   led.write(lightSwitchStatus ? 1 : 0, err => {
-  //     io.sockets.emit("status", { lightSwitchStatus });
-  //   });
-  // });
   lightSwitchButton.watch((err, value) => {
     if (value == 1) {
       lightSwitchStatus = !lightSwitchStatus;
@@ -72,5 +63,5 @@ app.get("/tempandhumid", (req, res) => {
 
 process.on("SIGINT", () => {
   led.unexport();
-  lightSwitch.unexport();
+  lightSwitchButton.unexport();
 });

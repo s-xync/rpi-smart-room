@@ -2,9 +2,9 @@ import openSocket from "socket.io-client";
 
 const socket = openSocket(process.env.REACT_APP_SERVER_URL);
 
-// socket.on("connect", () => {
-//   console.log(socket.connected);
-// });
+socket.on("connect", () => {
+  console.log(`Cloud socket connected.`);
+});
 
 const statusEventListener = callback => {
   socket.on("lightSwitchStatus", lightSwitch => {

@@ -16,10 +16,10 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log(process.env.REACT_APP_SERVER_URL);
     this.ejected = false;
     this.bindStatusEventListener();
     this.getTempAndHumid();
-    console.log(process.env.REACT_APP_SERVER_URL);
   }
 
   componentWillUnmount() {
@@ -34,6 +34,8 @@ class App extends Component {
         if (response.data.success) {
           const { temperature, humidity } = response.data.message;
           this.setState({ temperature, humidity });
+        } else {
+          console.log(response.data.message);
         }
       })
       .catch(err => {

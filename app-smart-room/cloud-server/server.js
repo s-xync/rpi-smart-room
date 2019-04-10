@@ -2,6 +2,7 @@ const express = require("express");
 const socket = require("socket.io");
 const openSocket = require("socket.io-client");
 const cors = require("cors");
+const request = require("request");
 
 require("dotenv").config({ path: __dirname + "/.env.local" });
 
@@ -70,10 +71,25 @@ io.on("connection", client => {
   client.on("lightSwitchToggle", () => {
     // changing changeableLightSwitch will trigger events using the onChange utility
     changeableLightSwitch.status = !lightSwitch.status;
-    // io.sockets.emit("lightSwitchStatus", lightSwitch);
   });
 
   socketCloudToRpiClient.on("lightSwitchStatus", lightSwitch => {
     io.sockets.emit("lightSwitchStatus", lightSwitch);
   });
+});
+
+app.get("/tempandhumid", (req, res) => {
+  request(
+    process.env.RPI_SERVER_URL + "/tempandhumid",
+    (err, response, body) => {
+      if (!err) {
+        return res.send(body);
+      } else {
+        return res.json({
+          success: false,
+          message: "Internal server error"
+        });
+      }
+    }
+  );
 });
