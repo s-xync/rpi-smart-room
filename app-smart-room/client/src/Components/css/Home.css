@@ -1,0 +1,38 @@
+#app > h1 {
+  font-size: 3.25rem;
+  margin-top: 1rem;
+}
+
+#app > h2 {
+  display: inline-block;
+  border-bottom: 0.2rem solid black;
+  margin-bottom: 0.75rem;
+}
+
+#app {
+  z-index: 0;
+  font-weight: 600;
+}
+
+.app-switch {
+  z-index: inherit;
+}
+
+.app-switch:not([disabled]):hover {
+  z-index: 1;
+  transform: scale(1.05, 1.05);
+}
+
+.numbers {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.refresh-button {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.refresh-button:hover {
+  transform: scale(1.05, 1.05);
+}
