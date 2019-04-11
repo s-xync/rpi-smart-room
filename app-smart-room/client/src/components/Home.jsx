@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Switch from "react-switch";
 import axios from "axios";
-import "./Home.css";
+import "./css/Home.css";
 import {
   statusEventListener,
   emitSetLightSwitchStatus,
