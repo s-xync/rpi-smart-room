@@ -6,7 +6,7 @@ import { getTokenInfo } from "./store/actions/authActions";
 import "./App.css";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-// import Login from "./components/Login";
+import Login from "./components/Login";
 
 const ProtectedRoute = ({ isAllowed, ...props }) => {
   const propsObject = { ...props };
@@ -26,8 +26,7 @@ class App extends Component {
       <BrowserRouter>
         <Fragment>
           <Navbar />
-          <Home />
-          {/* <Switch>
+          <Switch>
             <Route path="/login" exact component={Login} />
             <ProtectedRoute
               path="/"
@@ -36,7 +35,7 @@ class App extends Component {
               component={Home}
             />
             <Route component={Login} />
-          </Switch> */}
+          </Switch>
         </Fragment>
       </BrowserRouter>
     );

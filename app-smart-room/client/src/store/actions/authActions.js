@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const appLogin = credentials => dispatch => {
   axios
-    .post(process.env.REACT_APP_ADMIN_API_URL + "/admins/login", {
+    .post(process.env.REACT_APP_SERVER_URL + "/admins/login", {
       ...credentials
     })
     .then(response => {
@@ -32,7 +32,7 @@ export const appLogin = credentials => dispatch => {
 export const getTokenInfo = () => dispatch => {
   const jwt = JSON.parse(localStorage.getItem("jwt"));
   axios
-    .get(process.env.REACT_APP_ADMIN_API_URL + "/admins/tokeninfo", {
+    .get(process.env.REACT_APP_SERVER_URL + "/admins/tokeninfo", {
       headers: {
         Authorization: jwt
       }

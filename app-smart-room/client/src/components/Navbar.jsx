@@ -9,7 +9,7 @@ import { appLogout } from "../store/actions/authActions";
 
 class Navbar extends Component {
   componentDidMount() {
-    var elem = document.querySelector(".sidenav");
+    const elem = document.querySelector(".sidenav");
     M.Sidenav.init(elem, {
       edge: "left",
       inDuration: 250
@@ -24,32 +24,26 @@ class Navbar extends Component {
             <NavLink className="brand-logo" to="/">
               Smarty Room
             </NavLink>
-            {this.props.loggedIn && (
-              <Fragment>
-                <a
-                  href="#"
-                  data-target="mobile-demo"
-                  className="sidenav-trigger"
-                >
-                  <i className="material-icons">menu</i>
-                </a>
-                <ul className="right hide-on-med-and-down">
-                  <li>
-                    <a onClick={this.props.appLogout}>Logout</a>
-                  </li>
-                </ul>
-              </Fragment>
-            )}
+            <a href="#" data-target="mobile-demo" className="sidenav-trigger">
+              <i className="material-icons">menu</i>
+            </a>
+            <ul className="right hide-on-med-and-down">
+              {this.props.loggedIn && (
+                <li>
+                  <a onClick={this.props.appLogout}>Logout</a>
+                </li>
+              )}
+            </ul>
           </div>
         </nav>
 
-        {this.props.loggedIn && (
-          <ul className="sidenav" id="mobile-demo">
+        <ul className="sidenav" id="mobile-demo">
+          {this.props.loggedIn && (
             <li>
               <a onClick={this.props.appLogout}>Logout</a>
             </li>
-          </ul>
-        )}
+          )}
+        </ul>
       </Fragment>
     );
   }
