@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway|Roboto");
+
 body {
   margin: 0;
   padding: 0;
-  font-family: "Latin Modern Sans", "Free Sans";
+  font-family: "Raleway", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

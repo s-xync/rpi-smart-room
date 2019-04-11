@@ -1,25 +1,38 @@
-#app {
-  margin-left: 10%;
+#app > h1 {
+  font-size: 3.25rem;
+  margin-top: 1rem;
 }
 
-#app .heading {
-  text-decoration: underline;
-}
-
-#app .refresh-button {
-  background-color: #1264dd; /* Green */
-  border: none;
-  color: white;
-  padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
+#app > h2 {
   display: inline-block;
-  font-size: 14px;
-  border-radius: 20px;
-  cursor: pointer;
+  border-bottom: 0.2rem solid black;
+  margin-bottom: 0.75rem;
 }
 
-#app .refresh-button:focus {
-  outline: none;
+#app {
+  z-index: 0;
+  font-weight: 600;
+}
+
+.app-switch {
+  z-index: inherit;
+}
+
+.app-switch:not([disabled]):hover {
+  z-index: 1;
+  transform: scale(1.05, 1.05);
+}
+
+.numbers {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.refresh-button {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.refresh-button:hover {
+  transform: scale(1.05, 1.05);
 }

@@ -56,7 +56,7 @@ class App extends Component {
     });
   };
 
-  handleChangeLightSwitch = lightSwitchStatus => {
+  handleChangeLightSwitchStatus = lightSwitchStatus => {
     this.setState({ lightSwitchStatus });
     emitSetLightSwitchStatus(lightSwitchStatus);
   };
@@ -68,24 +68,58 @@ class App extends Component {
 
   render() {
     return (
-      <div id="app">
-        <p className="heading">
-          Switch the light <strong>ON</strong> or <strong>OFF</strong>
-        </p>
-        <Switch
-          onChange={this.handleChangeLightSwitchAutomatic}
-          checked={this.state.lightSwitchAutomatic}
-        />
-        <Switch
-          onChange={this.handleChangeLightSwitch}
-          checked={this.state.lightSwitchStatus}
-        />
+      <div id="app" className="container">
+        <h1>Smart Room</h1>
+        <hr />
+        <h2>Control</h2>
+        <div className="row align-items-center">
+          <div className="col-md-2 col-sm-4">
+            <h4>Automatic: </h4>
+          </div>
+          <div className="col-md-2 col-sm-4">
+            <Switch
+              className="app-switch"
+              onChange={this.handleChangeLightSwitchAutomatic}
+              checked={this.state.lightSwitchAutomatic}
+            />
+          </div>
+        </div>
+        <div className="row align-items-center">
+          <div className="col-md-2 col-sm-4">
+            <h4>Switch: </h4>
+          </div>
+          <div className="col-md-2 col-sm-4">
+            <Switch
+              className="app-switch"
+              onChange={this.handleChangeLightSwitchStatus}
+              checked={this.state.lightSwitchStatus}
+              disabled={this.state.lightSwitchAutomatic}
+            />
+          </div>
+        </div>
         <br />
-        <br />
-        <p className="heading">Temperature and Humidity</p>
-        <p>{this.state.temperature}⁰C</p>
-        <p>{this.state.humidity}%RH</p>
-        <button className="refresh-button" onClick={this.getTempAndHumid}>
+        <h2>Conditions</h2>
+        <div className="row align-items-center">
+          <div className="col-md-2 col-sm-4">
+            <h4>Temperature: </h4>
+          </div>
+          <div className="col-md-2 col-sm-4">
+            <h4 className="numbers">{this.state.temperature + "⁰c"}</h4>
+          </div>
+        </div>
+        <div className="row align-items-center">
+          <div className="col-md-2 col-sm-4">
+            <h4>Humidity: </h4>
+          </div>
+          <div className="col-md-2 col-sm-4">
+            <h4 className="numbers">{this.state.humidity + "%RH"}</h4>
+          </div>
+        </div>
+        <button
+          type="button"
+          className="btn btn-outline-primary refresh-button"
+          onClick={this.getTempAndHumid}
+        >
           Refresh
         </button>
       </div>
