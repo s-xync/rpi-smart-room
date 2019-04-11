@@ -1,14 +1,41 @@
 const express = require("express");
 const socket = require("socket.io");
 const openSocket = require("socket.io-client");
-const cors = require("cors");
 const request = require("request");
+const mongoose = require("mongoose");
+const passport = require("passport");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const apiRoutes = require("./modules");
 
 require("dotenv").config({ path: __dirname + "/.env.local" });
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
+
+mongoose.Promise = global.Promise;
+
+try {
+  mongoose.connect(process.env.MONGODB_URL, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useFindAndModify: false
+  });
+} catch (err) {
+  throw err;
+}
+
+mongoose.connection
+  .once("open", () =>
+    console.log(`MongoDB connected and the URL is ${process.env.MONGODB_URL}`)
+  )
+  .on("error", err => {
+    throw err;
+  });
 
 const PORT = process.env.PORT || 8000;
 const server = app.listen(PORT, () => {
@@ -101,3 +128,5 @@ app.get("/tempandhumid", (req, res) => {
     }
   );
 });
+
+apiRoutes(app);
