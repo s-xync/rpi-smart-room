@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "surge teardown https://socket-switch.surge.sh && surge build https://socket-switch.surge.sh"
+    "deploy": "surge teardown https://smarty-room.surge.sh && surge build https://smarty-room.surge.sh"
   },
   "eslintConfig": {
     "extends": "react-app"

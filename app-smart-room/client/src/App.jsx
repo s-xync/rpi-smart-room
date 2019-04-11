@@ -69,7 +69,7 @@ class App extends Component {
   render() {
     return (
       <div id="app" className="container">
-        <h1>Smart Room</h1>
+        <h1>Smarty Room</h1>
         <hr />
         <h2>Control</h2>
         <div className="row align-items-center">
