@@ -1,38 +1,33 @@
-#app > h1 {
-  font-size: 3.25rem;
-  margin-top: 1rem;
+.switch p {
+  display: inline;
+  font-size: 1rem;
 }
 
-#app > h2 {
-  display: inline-block;
-  border-bottom: 0.2rem solid black;
-  margin-bottom: 0.75rem;
+.card-panel.faded {
+  opacity: 0.5;
 }
 
-#app {
-  z-index: 0;
-  font-weight: 600;
+.switch {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.app-switch {
-  z-index: inherit;
+.card-heading {
+  font-size: 1.5rem;
 }
 
-.app-switch:not([disabled]):hover {
-  z-index: 1;
-  transform: scale(1.05, 1.05);
+.card-panel i {
+  margin-top: 1.5rem;
+  margin-left: 1.25rem;
 }
 
-.numbers {
-  font-family: "Roboto", sans-serif;
+.tandh-value {
+  margin: 1.4rem 0 0 0.5rem;
   font-weight: 400;
+  font-size: 2.2rem;
+  font-family: "Roboto", sans-serif;
 }
 
-.refresh-button {
-  margin-top: 0.8rem;
-  font-size: 1.1rem;
-}
-
-.refresh-button:hover {
-  transform: scale(1.05, 1.05);
+footer {
+  margin-top: 0.5rem;
 }

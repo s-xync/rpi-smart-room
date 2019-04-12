@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && mv build/index.html build/200.html",
     "deploy": "surge teardown https://smarty-room.surge.sh && surge build https://smarty-room.surge.sh"
   },
   "eslintConfig": {

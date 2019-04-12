@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Switch from "react-switch";
+import React, { Component, Fragment } from "react";
 import axios from "axios";
+import Switch from "react-switch";
 import "./css/Home.css";
 import {
   statusEventListener,
@@ -68,61 +68,100 @@ class Home extends Component {
 
   render() {
     return (
-      <div id="app" className="container">
-        <h1>Smarty Room</h1>
-        <hr />
-        <h2>Control</h2>
-        <div className="row align-items-center">
-          <div className="col-md-2 col-sm-4">
-            <h4>Automatic: </h4>
-          </div>
-          <div className="col-md-2 col-sm-4">
-            <Switch
-              className="app-switch"
-              onChange={this.handleChangeLightSwitchAutomatic}
-              checked={this.state.lightSwitchAutomatic}
-            />
-          </div>
-        </div>
-        <div className="row align-items-center">
-          <div className="col-md-2 col-sm-4">
-            <h4>Switch: </h4>
-          </div>
-          <div className="col-md-2 col-sm-4">
-            <Switch
-              className="app-switch"
-              onChange={this.handleChangeLightSwitchStatus}
-              checked={this.state.lightSwitchStatus}
-              disabled={this.state.lightSwitchAutomatic}
-            />
+      <Fragment>
+        <div className="container home">
+          <br />
+          <div className="section">
+            <div className="row">
+              <div className="col s12 m6 center">
+                <div className="card-panel white ">
+                  <span className="light text-darken-1 blue-text">
+                    <span className="card-heading">Automatic Mode</span>
+                    <div className="switch">
+                      <label>
+                        <Switch
+                          className="app-switch"
+                          onChange={this.handleChangeLightSwitchAutomatic}
+                          checked={this.state.lightSwitchAutomatic}
+                        />
+                      </label>
+                    </div>
+                  </span>
+                </div>
+              </div>
+              <div className="col s12 m6 center">
+                <div
+                  className={
+                    "card-panel white " +
+                    (this.state.lightSwitchAutomatic ? "faded" : "")
+                  }
+                >
+                  <span className="light text-darken-2 blue-text">
+                    <span className="card-heading">Switch</span>
+                    <div className="switch">
+                      <label>
+                        <Switch
+                          className="app-switch"
+                          onChange={this.handleChangeLightSwitchStatus}
+                          checked={this.state.lightSwitchStatus}
+                          disabled={this.state.lightSwitchAutomatic}
+                        />
+                      </label>
+                    </div>
+                  </span>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col s12 m6">
+                  <div className="card-panel  blue accent-1 white-text ">
+                    <div className="row">
+                      <div className="col s12 m4">
+                        <i className="large fas fa-thermometer-half" />
+                      </div>
+                      <div className="col s12 m8 ">
+                        <span className="text-darken-2 ">
+                          <span className="card-heading">Temperature</span>
+                          <div className="tandh-value">
+                            <span>{this.state.temperature}</span>°C
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col s12 m6">
+                  <div className="card-panel blue accent-1 white-text">
+                    <div className="row">
+                      <div className="col s12 m4">
+                        <i class="large fas fa-tint" />
+                      </div>
+                      <div className="col s12 m8 ">
+                        <span className="text-darken-2 ">
+                          <span className="card-heading">Humidity</span>
+                          <div className="tandh-value">
+                            <span>{this.state.humidity}</span>%RH
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className=" center">
+              <button
+                className="btn-large waves-effect waves-light orange"
+                onClick={this.getTempAndHumid}
+              >
+                Refresh
+              </button>
+            </div>
           </div>
         </div>
         <br />
-        <h2>Conditions</h2>
-        <div className="row align-items-center">
-          <div className="col-md-2 col-sm-4">
-            <h4>Temperature: </h4>
-          </div>
-          <div className="col-md-2 col-sm-4">
-            <h4 className="numbers">{this.state.temperature + "⁰c"}</h4>
-          </div>
-        </div>
-        <div className="row align-items-center">
-          <div className="col-md-2 col-sm-4">
-            <h4>Humidity: </h4>
-          </div>
-          <div className="col-md-2 col-sm-4">
-            <h4 className="numbers">{this.state.humidity + "%RH"}</h4>
-          </div>
-        </div>
-        <button
-          type="button"
-          className="btn btn-outline-primary refresh-button"
-          onClick={this.getTempAndHumid}
-        >
-          Refresh
-        </button>
-      </div>
+        <footer className="page-footer red darken-4" />
+      </Fragment>
     );
   }
 }
