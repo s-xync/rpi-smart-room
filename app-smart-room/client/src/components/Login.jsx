@@ -99,7 +99,7 @@ class Login extends Component {
             </div>
           </center>
           <br />
-          <footer className="page-footer red darken-4" />
+          <footer className="page-footer red lighten-2" />
         </main>
       </Fragment>
     );

@@ -92,8 +92,12 @@ class Home extends Component {
               <div className="col s12 m6 center">
                 <div
                   className={
-                    "card-panel white " +
-                    (this.state.lightSwitchAutomatic ? "faded" : "")
+                    "card-panel " +
+                    (this.state.lightSwitchAutomatic ? "faded " : " ") +
+                    (this.state.lightSwitchAutomatic &&
+                    this.state.lightSwitchStatus
+                      ? "green lighten-2"
+                      : "white")
                   }
                 >
                   <span className="light text-darken-2 blue-text">
@@ -151,7 +155,7 @@ class Home extends Component {
             </div>
             <div className=" center">
               <button
-                className="btn-large waves-effect waves-light orange"
+                className="btn-large waves-effect waves-light red lighten-2"
                 onClick={this.getTempAndHumid}
               >
                 Refresh
@@ -160,7 +164,7 @@ class Home extends Component {
           </div>
         </div>
         <br />
-        <footer className="page-footer red darken-4" />
+        <footer className="page-footer red lighten-2" />
       </Fragment>
     );
   }
