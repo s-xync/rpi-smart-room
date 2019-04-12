@@ -51,7 +51,6 @@ class Login extends Component {
                   <div className="row">
                     <div className="col s12" />
                   </div>
-
                   <div className="row">
                     <div className="input-field col s12">
                       <input
@@ -65,7 +64,6 @@ class Login extends Component {
                       <label htmlFor="email">Enter your email</label>
                     </div>
                   </div>
-
                   <div className="row">
                     <div className="input-field col s12">
                       <input
@@ -89,7 +87,7 @@ class Login extends Component {
                       <button
                         type="submit"
                         name="btn_login"
-                        className="col s12 btn btn-large waves-effect indigo"
+                        className="col s12 btn btn-large waves-effect waves-light blue"
                         onClick={this.loginClicked}
                       >
                         Login

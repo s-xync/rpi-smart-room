@@ -134,7 +134,7 @@ class Home extends Component {
                   <div className="card-panel blue accent-1 white-text">
                     <div className="row">
                       <div className="col s12 m4">
-                        <i class="large fas fa-tint" />
+                        <i className="large fas fa-tint" />
                       </div>
                       <div className="col s12 m8 ">
                         <span className="text-darken-2 ">
