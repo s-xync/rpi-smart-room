@@ -1,0 +1,33 @@
+.switch p {
+  display: inline;
+  font-size: 1rem;
+}
+
+.card-panel.faded {
+  opacity: 0.5;
+}
+
+.switch {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-heading {
+  font-size: 1.5rem;
+}
+
+.card-panel i {
+  margin-top: 1.5rem;
+  margin-left: 1.25rem;
+}
+
+.tandh-value {
+  margin: 1.4rem 0 0 0.5rem;
+  font-weight: 400;
+  font-size: 2.2rem;
+  font-family: "Roboto", sans-serif;
+}
+
+footer {
+  margin-top: 0.5rem;
+}

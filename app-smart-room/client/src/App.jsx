@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { getTokenInfo } from "./store/actions/authActions";
 import "./App.css";
-import Home from "./components/Home";
+import Home from "./components/HomeDup";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 

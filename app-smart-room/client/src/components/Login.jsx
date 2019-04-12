@@ -40,13 +40,11 @@ class Login extends Component {
   render() {
     return (
       <Fragment>
-        <div className="section" />
+        <br />
         <main>
           <center>
-            <div className="section" />
             <h5 className="indigo-text">Please, login into your account</h5>
-            <div className="section" />
-
+            <br />
             <div className="form-container">
               <div className="z-depth-1 grey lighten-4 row">
                 <form className="col s12" onSubmit={this.loginClicked}>
@@ -102,9 +100,8 @@ class Login extends Component {
               </div>
             </div>
           </center>
-          <div className="section" />
-          <div className="section" />
-          <div className="section" />
+          <br />
+          <footer className="page-footer red darken-4" />
         </main>
       </Fragment>
     );
